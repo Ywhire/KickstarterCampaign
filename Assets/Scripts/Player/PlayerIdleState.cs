@@ -9,18 +9,27 @@ namespace OpenSystemGames.Player
 
         public override void Enter()
         {
+            if (stateMachine.debugLogOption)
+            {
+                Debug.Log("Player Idle State");
+            }
             
         }
 
-        public override void Tick()
+        public override void Tick(float deltaTime)
         {
-            Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            stateMachine.rb.velocity = direction.normalized;
+            if (Input.GetAxis("Fire1") == 1)
+            {
+                stateMachine.ChangeState(new PlayerAttackState(stateMachine));
+            }
+            Movement();
         }
         public override void Exit()
         {
             
         }
+
+        
     }
 }
 

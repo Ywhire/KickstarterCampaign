@@ -8,7 +8,7 @@ namespace OpenSystemGames.Core
 
         private void Update()
         {
-            currentState?.Tick();
+            currentState?.Tick(Time.deltaTime);
         }
 
         public void ChangeState(State newState)

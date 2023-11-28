@@ -1,16 +1,27 @@
 using OpenSystemGames.Core;
-using OpenSystemGames.Player;
 using UnityEngine;
 
-public class PlayerStateMachine : StateMachine
+namespace OpenSystemGames.Player
 {
-    [field:SerializeField]
-    public float speed { get; private set; }
-
-    [field: SerializeField]
-    public Rigidbody2D rb { get; private set; }
-    private void Start()
+    [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+    public class PlayerStateMachine : StateMachine
     {
-        ChangeState(new PlayerIdleState(this));
+        public bool debugLogOption;
+
+        [field: SerializeField]
+        public float Speed { get; private set; }
+
+        [field: SerializeField]
+        public Rigidbody2D Rigidbody2D { get; private set; }
+        [field: SerializeField]
+        public Animator Animator { get; private set; }
+        [field: SerializeField]
+        public GameObject LeftHand { get; private set; }
+        [field: SerializeField]
+        public GameObject RightHand { get; private set; }
+        private void Start()
+        {
+            ChangeState(new PlayerIdleState(this));
+        }
     }
 }

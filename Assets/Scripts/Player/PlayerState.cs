@@ -1,4 +1,5 @@
 using OpenSystemGames.Core;
+using UnityEngine;
 
 namespace OpenSystemGames.Player
 {
@@ -9,6 +10,12 @@ namespace OpenSystemGames.Player
         {
             this.stateMachine = stateMachine;
 
+        }
+
+        public void Movement()
+        {
+            Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            stateMachine.Rigidbody2D.velocity = direction.normalized * stateMachine.Speed;
         }
     }
 }
