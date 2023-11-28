@@ -18,7 +18,7 @@ namespace OpenSystemGames.Player
 
         public override void Tick(float deltaTime)
         {
-            if (Input.GetAxis("Fire1") == 1)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 stateMachine.ChangeState(new PlayerAttackState(stateMachine));
             }

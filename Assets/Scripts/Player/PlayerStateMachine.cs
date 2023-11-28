@@ -7,6 +7,7 @@ namespace OpenSystemGames.Player
     public class PlayerStateMachine : StateMachine
     {
         public bool debugLogOption;
+        public Transform ProjectileSpawnPoint;
 
         [field: SerializeField]
         public float Speed { get; private set; }
@@ -16,9 +17,8 @@ namespace OpenSystemGames.Player
         [field: SerializeField]
         public Animator Animator { get; private set; }
         [field: SerializeField]
-        public GameObject LeftHand { get; private set; }
-        [field: SerializeField]
-        public GameObject RightHand { get; private set; }
+        public GameObject Projectile { get; private set; }
+
         private void Start()
         {
             ChangeState(new PlayerIdleState(this));
