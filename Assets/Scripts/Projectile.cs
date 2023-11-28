@@ -7,7 +7,7 @@ namespace OpenSystemGames.Core
     {
         public float rotationOffset = -90;
         public float projectileSpeed;
-        public Rigidbody2D rigidbody2D;
+        public new Rigidbody2D rigidbody2D;
         public float projectileLifetime;
 
         private float timer ;
