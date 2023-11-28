@@ -20,6 +20,8 @@ namespace OpenSystemGames.Player
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Debug.Log("I hit");
+
                 if (Physics.Raycast(ray, out RaycastHit rayHit))
                 {
                     rayHit.collider.CompareTag(movableTag);
