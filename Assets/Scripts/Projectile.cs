@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace OpenSystemGames.Core
 {
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Projectile : MonoBehaviour
     {
-        Vector3 target = transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        target.z = 0;
+        public float rotationOffset = -90;
+        public float projectileSpeed;
+        public Rigidbody2D rigidbody2D;
+        public float projectileLifetime;
 
-        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg + -90;
-        transform.Rotate(0, 0, angle);
+        private float timer ;
+        void Start()
+        {
+            Vector3 target = transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            target.z = 0;
+
+            float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg + rotationOffset;
+            transform.Rotate(0, 0, angle);
+            rigidbody2D.velocity = transform.up * projectileSpeed;
+        }
+        private void Update()
+        {
+            timer += Time.deltaTime;
+            if (projectileLifetime < timer)
+            {
+                Destroy(gameObject);
+            }
+            
+        }
     }
 
 }

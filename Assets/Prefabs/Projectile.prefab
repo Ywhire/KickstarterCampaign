@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2840669178394668198}
   - component: {fileID: 6341519083211609009}
   - component: {fileID: 4521288502397187027}
+  - component: {fileID: 6569406957571558744}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -182,3 +183,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07dc104310f0db4988c4eff2179176b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationOffset: -90
+  projectileSpeed: 5
+  rigidbody2D: {fileID: 6569406957571558744}
+  projectileLifetime: 3
+--- !u!50 &6569406957571558744
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821933192206795923}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
