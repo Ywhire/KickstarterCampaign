@@ -22,6 +22,10 @@ namespace OpenSystemGames.Player
             {
                 stateMachine.ChangeState(new PlayerAttackState(stateMachine));
             }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                stateMachine.ChangeState(new PlayerTelekinesisState(stateMachine));
+            }
             Movement();
         }
         public override void Exit()
