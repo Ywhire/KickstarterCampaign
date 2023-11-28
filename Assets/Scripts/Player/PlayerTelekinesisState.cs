@@ -3,7 +3,8 @@ namespace OpenSystemGames.Player
 {
     public class PlayerTelekinesisState : PlayerState
     {
-        private const string movableTag = "Movable";
+        private const int movableLayer = 6;
+        
         public PlayerTelekinesisState(PlayerStateMachine stateMachine) : base(stateMachine)
         { }
 
@@ -19,17 +20,15 @@ namespace OpenSystemGames.Player
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Debug.Log("I hit");
-
-                if (Physics.Raycast(ray, out RaycastHit rayHit))
+                Vector3 mousePos = Input.mousePosition;
+                mousePos.z = Mathf.Infinity;
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, mousePos - Camera.main.ScreenToViewportPoint(mousePos), Mathf.Infinity);
+                if (hit)
                 {
-                    rayHit.collider.CompareTag(movableTag);
                     if (stateMachine.debugLogOption)
-                    {
-                        Debug.Log("I hit the movable object");
-                    }
+                        Debug.Log("I hit");
                 }
+                
             }
         }
         public override void Exit()
