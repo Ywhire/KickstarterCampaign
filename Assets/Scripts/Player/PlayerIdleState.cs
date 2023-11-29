@@ -26,6 +26,10 @@ namespace OpenSystemGames.Player
             {
                 stateMachine.ChangeState(new PlayerTelekinesisState(stateMachine));
             }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                stateMachine.ChangeState(new PlayerDashState(stateMachine));
+            }
             Movement();
         }
         public override void Exit()

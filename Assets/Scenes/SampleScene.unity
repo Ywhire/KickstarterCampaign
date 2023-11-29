@@ -694,6 +694,8 @@ MonoBehaviour:
   <Rigidbody2D>k__BackingField: {fileID: 2097033108}
   <Animator>k__BackingField: {fileID: 2097033107}
   <Projectile>k__BackingField: {fileID: 8821933192206795923, guid: 19ab128eb3b5f0d439bd8d6c38ab885e, type: 3}
+  <DashSpeed>k__BackingField: 30
+  <dashTime>k__BackingField: 0.1
 --- !u!95 &2097033107
 Animator:
   serializedVersion: 5
