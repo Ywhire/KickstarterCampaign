@@ -37,6 +37,9 @@ namespace OpenSystemGames.Player
         [field: SerializeField]
         public LayerMask telekinesisLayer { get; private set; }
 
+        [field: SerializeField]
+        public GameObject telekinesisObject { get; private set; }
+
         private void Start()
         {
             cam = Camera.main;

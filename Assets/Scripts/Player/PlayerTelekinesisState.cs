@@ -12,6 +12,7 @@ namespace OpenSystemGames.Player
 
         public override void Enter()
         {
+            stateMachine.telekinesisObject.SetActive(true);
             if (stateMachine.debugLogOption)
             {
                 Debug.Log("Player Telekinesis State");
@@ -23,13 +24,11 @@ namespace OpenSystemGames.Player
 
             RaycastHit2D hit = CastRay();
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && hit.collider != null)
+            if (Input.GetKey(KeyCode.Mouse0) && hit.collider != null)
             {
+                Vector2 mousePositionXY = GetMousePosition();
                 //HOLD OBJECT
-            }
-            if (Input.GetKeyDown(KeyCode.Mouse0) && hit.collider != null)
-            {
-                //RELEASE OBJECT
+                hit.collider.gameObject.transform.position = new Vector3(mousePositionXY.x, mousePositionXY.y, 0);
             }
             if (Input.GetKeyDown(KeyCode.Q)) //CHANGE STATE TO IDLE
             {
@@ -38,15 +37,16 @@ namespace OpenSystemGames.Player
         }
         public override void Exit()
         {
-
+            stateMachine.telekinesisObject.SetActive(false);
         }
         private RaycastHit2D CastRay()
         {
-            //CAST A RAY FROM "PLAYER" TO ANY COLLIDEABLE "OBJECT"
+            //CAST A RAY FROM "PLAYER" TO "MOUSE POSITION"
             Vector2 mousePosition = GetMousePosition();
-            hit = Physics2D.Raycast(stateMachine.transform.position, mousePosition, stateMachine.telekinesisLayer, stateMachine.telekinesisRadius);
-            Debug.DrawRay(stateMachine.transform.position, mousePosition, Color.red);
-            Debug.Log(hit.collider);
+            Vector2 targetPosition = mousePosition - new Vector2(stateMachine.transform.position.x, stateMachine.transform.position.y);
+            hit = Physics2D.Raycast(stateMachine.transform.position, targetPosition, stateMachine.telekinesisRadius, stateMachine.telekinesisLayer);
+            Debug.DrawRay(stateMachine.transform.position, targetPosition, Color.red);
+
             return hit;
             
         }
