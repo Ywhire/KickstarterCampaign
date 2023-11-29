@@ -3,7 +3,9 @@ namespace OpenSystemGames.Player
 {
     public class PlayerTelekinesisState : PlayerState
     {
-        private const int movableLayer = 6;
+        private Vector2 stablePoint;
+        private Vector2 hitPosXY;
+        private Vector2 mousePos;
         RaycastHit2D hit;
 
 
@@ -12,6 +14,7 @@ namespace OpenSystemGames.Player
 
         public override void Enter()
         {
+            stablePoint = stateMachine.transform.position;
             stateMachine.telekinesisObject.SetActive(true);
             if (stateMachine.debugLogOption)
             {
@@ -21,14 +24,17 @@ namespace OpenSystemGames.Player
 
         public override void Tick(float deltaTime)
         {
-
+            stateMachine.transform.position = stablePoint;
             RaycastHit2D hit = CastRay();
-
-            if (Input.GetKey(KeyCode.Mouse0) && hit.collider != null)
+            mousePos = GetMousePosition();
+            if (hit.collider != null)
             {
-                Vector2 mousePositionXY = GetMousePosition();
+                hitPosXY = new Vector2(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y);
+            }
+            if (Input.GetKey(KeyCode.Mouse0) && hit.collider != null && ((hitPosXY - mousePos).magnitude <= 0.75f))
+            {
                 //HOLD OBJECT
-                hit.collider.gameObject.transform.position = new Vector3(mousePositionXY.x, mousePositionXY.y, 0);
+                hit.collider.gameObject.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
             }
             if (Input.GetKeyDown(KeyCode.Q)) //CHANGE STATE TO IDLE
             {
@@ -44,7 +50,7 @@ namespace OpenSystemGames.Player
             //CAST A RAY FROM "PLAYER" TO "MOUSE POSITION"
             Vector2 mousePosition = GetMousePosition();
             Vector2 targetPosition = mousePosition - new Vector2(stateMachine.transform.position.x, stateMachine.transform.position.y);
-            hit = Physics2D.Raycast(stateMachine.transform.position, targetPosition, stateMachine.telekinesisRadius, stateMachine.telekinesisLayer);
+            hit = Physics2D.Raycast(stateMachine.transform.position, targetPosition, stateMachine.telekinesisRadius , stateMachine.telekinesisLayer);
             Debug.DrawRay(stateMachine.transform.position, targetPosition, Color.red);
 
             return hit;
