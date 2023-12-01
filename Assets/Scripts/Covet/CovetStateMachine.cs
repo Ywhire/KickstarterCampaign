@@ -16,9 +16,6 @@ namespace OpenSystemGames.Enemy
         public Rigidbody2D Rigidbody2D { get; private set; }
 
         public GameObject Player { get; private set; }
-        
-        [field: SerializeField, Min(0)]
-        public float RangedAttackDistance { get; private set; }
 
         [field: SerializeField, Min(0)]
         public float MeleeAttackDistance { get; private set; }
