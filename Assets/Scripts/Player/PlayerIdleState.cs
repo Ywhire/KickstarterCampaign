@@ -9,7 +9,7 @@ namespace OpenSystemGames.Player
 
         public override void Enter()
         {
-            if (stateMachine.debugLogOption)
+            if (StateMachine.debugLogOption)
             {
                 Debug.Log("Player Idle State");
             }
@@ -20,15 +20,15 @@ namespace OpenSystemGames.Player
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                stateMachine.ChangeState(new PlayerAttackState(stateMachine));
+                StateMachine.ChangeState(new PlayerAttackState(StateMachine));
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                stateMachine.ChangeState(new PlayerTelekinesisState(stateMachine));
+                StateMachine.ChangeState(new PlayerTelekinesisState(StateMachine));
             }
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                stateMachine.ChangeState(new PlayerDashState(stateMachine));
+                StateMachine.ChangeState(new PlayerDashState(StateMachine));
             }
             Movement();
         }

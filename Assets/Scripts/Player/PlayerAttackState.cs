@@ -10,12 +10,12 @@ namespace OpenSystemGames.Player
         public override void Enter()
         {
             
-            GameObject.Instantiate(stateMachine.Projectile, stateMachine.ProjectileSpawnPoint.position, Quaternion.identity);
-            if (stateMachine.debugLogOption)
+            GameObject.Instantiate(StateMachine.Projectile, StateMachine.ProjectileSpawnPoint.position, Quaternion.identity);
+            if (StateMachine.debugLogOption)
             {
                 Debug.Log("Mouse is pressed");
             }
-            if (stateMachine.debugLogOption)
+            if (StateMachine.debugLogOption)
             {
                 Debug.Log("Player Attack State");
             }
@@ -25,7 +25,7 @@ namespace OpenSystemGames.Player
         {
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                stateMachine.ChangeState(new PlayerIdleState(stateMachine));
+                StateMachine.ChangeState(new PlayerIdleState(StateMachine));
             }
             Movement();
         }
