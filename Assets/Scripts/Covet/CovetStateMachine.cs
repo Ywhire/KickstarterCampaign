@@ -39,6 +39,11 @@ namespace OpenSystemGames.Enemy
             }
             ChangeState(new CovetIdleState(this));
         }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, MeleeAttackDistance);
+        }
     }
 }
 

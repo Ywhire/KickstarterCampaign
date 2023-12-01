@@ -11,6 +11,7 @@ namespace OpenSystemGames.Enemy
 
         public override void Enter()
         {
+            base.Enter();
             if (StateMachine.DebugLogOption)
             {
                 Debug.Log("Covet Melee Attack State");
@@ -20,10 +21,13 @@ namespace OpenSystemGames.Enemy
 
         public override void Tick(float deltaTime)
         {
-            float distance = (StateMachine.Player.transform.position - StateMachine.transform.position).sqrMagnitude;
-            if (distance <= StateMachine.RangedAttackDistance)
+            timer += deltaTime;           
+
+            // TODO: this code represents animation time, it will change when animations complete
+            if (timer > changeStateTime)
             {
-                StateMachine.ChangeState(new CovetRangedAttackState(StateMachine));
+
+                ChangeState(IsPlayerInMeleeRange());
                 return;
             }
         }

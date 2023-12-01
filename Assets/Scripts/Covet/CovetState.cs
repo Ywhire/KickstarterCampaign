@@ -22,10 +22,25 @@ namespace OpenSystemGames.Enemy
             StateMachine.Rigidbody2D.velocity = direction.normalized * StateMachine.Speed;
         }
 
-        protected void ChangeState()
+        protected bool IsPlayerInMeleeRange()
         {
-            // This range represents the state size
-            int no = Random.Range(1, 4);
+            return (StateMachine.Player.transform.position - StateMachine.transform.position).magnitude <= 
+                StateMachine.MeleeAttackDistance;
+        }
+        protected void ChangeState(bool IsMeleeRange)
+        {
+            int no;
+            if (IsMeleeRange)
+            {
+                // This range represents the state size and melee range is excluded
+                no = Random.Range(1, 4);
+            }
+            else
+            {
+                // This range represents the state size and melee range is included
+                no = Random.Range(1, 5);
+            }
+            
             switch (no)
             {
                 case 1:
@@ -36,6 +51,9 @@ namespace OpenSystemGames.Enemy
                     break;
                 case 3:
                     StateMachine.ChangeState(new CovetSecondRangedAttackState(StateMachine));
+                    break;
+                case 4:
+                    StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
                     break;
                 default:
                     StateMachine.ChangeState(new CovetIdleState(StateMachine));

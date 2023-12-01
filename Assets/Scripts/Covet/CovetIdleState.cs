@@ -18,20 +18,22 @@ namespace OpenSystemGames.Enemy
         }
         public override void Tick(float deltaTime)
         {
-            float distance = (StateMachine.Player.transform.position - StateMachine.transform.position).sqrMagnitude;
             timer += deltaTime;
-            if (timer > changeStateTime)
+            bool isPlayerInMeleeRange = IsPlayerInMeleeRange();
+
+            if (isPlayerInMeleeRange)
             {
-                ChangeState();
+                StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
                 return;
             }
-            //if (distance <= StateMachine.MeleeAttackDistance)
-            //{
-            //    StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
-            //    return;
-            //}
+
+            if (timer > changeStateTime)
+            {   
+                ChangeState(isPlayerInMeleeRange);
+                return;
+            }
+
             Movement();
-            
         }
         public override void Exit()
         {

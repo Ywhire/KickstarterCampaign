@@ -17,17 +17,26 @@ namespace OpenSystemGames.Enemy
         }
         public override void Tick(float deltaTime)
         {
+            // TODO: This will change when animations designed
             timer += deltaTime;
+            bool isPlayerInMeleeRange = IsPlayerInMeleeRange();
+
+
             if (timer > changeStateTime)
             {
-                ChangeState();
+                if (isPlayerInMeleeRange)
+                {
+                    StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
+                    return;
+                }
+                ChangeState(isPlayerInMeleeRange);
                 return;
             }
         }
 
         public override void Exit()
         {
-            timer = 0;
+
         }
     }
 }
