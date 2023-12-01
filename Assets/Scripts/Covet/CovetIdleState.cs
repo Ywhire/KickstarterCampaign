@@ -6,20 +6,23 @@ namespace OpenSystemGames.Enemy
         
         public CovetIdleState(CovetStateMachine stateMachine) : base(stateMachine)
         {}
-
+        
         public override void Enter()
         {
+            base.Enter();
             if (StateMachine.DebugLogOption)
             {
                 Debug.Log("Covet Idle State");
             }
+            
         }
         public override void Tick(float deltaTime)
         {
             float distance = (StateMachine.Player.transform.position - StateMachine.transform.position).sqrMagnitude;
-            if (distance <= StateMachine.RangedAttackDistance)
+            timer += deltaTime;
+            if (timer > changeStateTime)
             {
-                StateMachine.ChangeState(new CovetRangedAttackState(StateMachine));
+                ChangeState();
                 return;
             }
             //if (distance <= StateMachine.MeleeAttackDistance)
@@ -32,9 +35,9 @@ namespace OpenSystemGames.Enemy
         }
         public override void Exit()
         {
-            
+            timer = 0;
         }
-  
+        
     }
 }
 

@@ -23,6 +23,12 @@ namespace OpenSystemGames.Enemy
         [field: SerializeField, Min(0)]
         public float MeleeAttackDistance { get; private set; }
 
+        [field: SerializeField, Min(0), Header("Delay Range")]
+        public int MaxNumber { get; private set; }
+        
+        [field: SerializeField, Min(0)]
+        public int MinNumber { get; private set; }
+
         private void Start()
         {
             Player = GameObject.FindWithTag(playerTag);
