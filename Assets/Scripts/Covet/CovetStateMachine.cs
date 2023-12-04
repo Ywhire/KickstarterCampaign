@@ -26,6 +26,22 @@ namespace OpenSystemGames.Enemy
         [field: SerializeField, Min(0)]
         public int MinNumber { get; private set; }
 
+        [field: SerializeField, Min(1), Header("Ranged Attack Options")]
+
+        public int ProjectileAmount { get; private set; }
+
+        [field: SerializeField]
+        public GameObject ProjectileObject { get; private set; }
+
+        [field: SerializeField]
+        public float InstantiateRadious { get; private set; }
+
+        [field: SerializeField, Min(0)]
+        public float BetweenTime { get; private set; }
+
+        [field: SerializeField, Min(0)]
+        public float StateLifeTime { get; private set; }
+
         private void Start()
         {
             Player = GameObject.FindWithTag(playerTag);

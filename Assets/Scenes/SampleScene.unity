@@ -536,10 +536,14 @@ MonoBehaviour:
   DebugLogOption: 1
   <Speed>k__BackingField: 2
   <Rigidbody2D>k__BackingField: {fileID: 729228350}
-  <RangedAttackDistance>k__BackingField: 10
   <MeleeAttackDistance>k__BackingField: 3
   <MaxNumber>k__BackingField: 3
   <MinNumber>k__BackingField: 1
+  <ProjectileAmount>k__BackingField: 12
+  <ProjectileObject>k__BackingField: {fileID: 6962905780364217462, guid: 787e701380ee8e74884e3c90bb911d91, type: 3}
+  <InstantiateRadious>k__BackingField: 3
+  <BetweenTime>k__BackingField: 0.5
+  <StateLifeTime>k__BackingField: 4
 --- !u!1 &1450207383
 GameObject:
   m_ObjectHideFlags: 0
