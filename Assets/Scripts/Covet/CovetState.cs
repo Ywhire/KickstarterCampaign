@@ -11,15 +11,18 @@ namespace OpenSystemGames.Enemy
         {
             StateMachine = stateMachine;
         }
-        public override void Enter()
-        {
-            changeStateTime = Random.Range(StateMachine.MinNumber, StateMachine.MaxNumber);
-        }
+        
         public void Movement()
         {
             Vector2 direction = StateMachine.Player.transform.position - StateMachine.transform.position;
            
             StateMachine.Rigidbody2D.velocity = direction.normalized * StateMachine.Speed;
+        }
+        public void GetAway()
+        {
+            Vector2 direction = StateMachine.Player.transform.position - StateMachine.transform.position;
+
+            StateMachine.Rigidbody2D.velocity = - direction.normalized * StateMachine.Speed;
         }
 
         protected bool IsPlayerInMeleeRange()

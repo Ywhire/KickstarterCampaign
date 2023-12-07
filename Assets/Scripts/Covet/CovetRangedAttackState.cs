@@ -10,7 +10,7 @@ namespace OpenSystemGames.Enemy
         private float betweenTimer; 
         public override void Enter()
         {
-            base.Enter();
+
             if (StateMachine.DebugLogOption)
             {
                 Debug.Log("Covet Ranged Attack State");
@@ -39,18 +39,21 @@ namespace OpenSystemGames.Enemy
         {
             timer += deltaTime;
             betweenTimer += deltaTime;
-            bool isPlayerInMeleeRange = IsPlayerInMeleeRange();
             
 
             // TODO: This will change when animations designed 
             if (timer > StateMachine.StateLifeTime)
             {
-                if (isPlayerInMeleeRange)
+                int dice = Random.Range(0, 2);
+                if (dice == 0)
                 {
-                    StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
-                    return;
+                    StateMachine.ChangeState(new CovetIdleState(StateMachine));
                 }
-                ChangeState(isPlayerInMeleeRange);
+                else if (dice == 1)
+                {
+                    StateMachine.ChangeState(new CovetCooldownState(StateMachine));
+                }
+
                 return;
             }
 

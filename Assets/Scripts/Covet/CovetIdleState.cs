@@ -9,35 +9,60 @@ namespace OpenSystemGames.Enemy
         
         public override void Enter()
         {
-            base.Enter();
+
             if (StateMachine.DebugLogOption)
             {
                 Debug.Log("Covet Idle State");
             }
-            
+            StateMachine.Rigidbody2D.velocity = Vector2.zero;
         }
         public override void Tick(float deltaTime)
         {
-            timer += deltaTime;
-            bool isPlayerInMeleeRange = IsPlayerInMeleeRange();
-
-            if (isPlayerInMeleeRange)
+            float distance = (StateMachine.Player.transform.position - StateMachine.transform.position).magnitude;
+            if (distance > StateMachine.MeleeAttackDistance)
             {
-                StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
-                return;
+                int dice = Random.Range(0, 6);
+                if (dice < 3)
+                {
+                    StateMachine.ChangeState(new CovetMoveToTargetState(StateMachine));
+                }else if (dice >= 3)
+                {
+                    int dice2 = Random.Range(0, 2);
+                    if (dice2 == 0)
+                    {
+                        StateMachine.ChangeState(new CovetRangedAttackState(StateMachine));
+                    }
+                    else if (dice2 == 1)
+                    {
+                        StateMachine.ChangeState(new CovetSecondRangedAttackState(StateMachine));
+                    }
+                    
+                }
             }
-
-            if (timer > changeStateTime)
-            {   
-                ChangeState(isPlayerInMeleeRange);
-                return;
+            else if (distance <= StateMachine.MeleeAttackDistance)
+            {
+                int dice = Random.Range(0, 6);
+                if (dice < 3)
+                {
+                    StateMachine.ChangeState(new CovetGetAwayState(StateMachine));
+                }
+                else if (dice >= 3)
+                {
+                    int dice2 = Random.Range(0, 2);
+                    if (dice2 == 0)
+                    {
+                        StateMachine.ChangeState(new CovetMeleeAttackState(StateMachine));
+                    }
+                    else if (dice2 == 1)
+                    {
+                        StateMachine.ChangeState(new CovetSecondMeleeAttackState(StateMachine));
+                    }
+                    
+                }
             }
-
-            Movement();
         }
         public override void Exit()
         {
-            timer = 0;
         }
         
     }

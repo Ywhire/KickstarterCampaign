@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace OpenSystemGames.Enemy
@@ -11,7 +9,7 @@ namespace OpenSystemGames.Enemy
 
         public override void Enter()
         {
-            base.Enter();
+
             if (StateMachine.DebugLogOption)
             {
                 Debug.Log("Covet Melee Attack State");
@@ -24,10 +22,18 @@ namespace OpenSystemGames.Enemy
             timer += deltaTime;           
 
             // TODO: this code represents animation time, it will change when animations complete
-            if (timer > changeStateTime)
+            if (timer > 2f)
             {
-
-                ChangeState(IsPlayerInMeleeRange());
+                int dice = Random.Range(0, 2);
+                if (dice == 0)
+                {
+                    StateMachine.ChangeState(new CovetIdleState(StateMachine));
+                }
+                else if (dice == 1)
+                {
+                    StateMachine.ChangeState(new CovetCooldownState(StateMachine));
+                }
+                
                 return;
             }
         }
